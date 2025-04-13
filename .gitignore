@@ -1,0 +1,35 @@
+# Ignore build outputs
+bin/
+obj/
+
+# Ignore user-specific files
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Ignore VS Code settings
+.vs/
+
+# Ignore Rider files
+.idea/
+
+# Ignore logs
+*.log
+
+# Ignore database files
+*.db
+
+# Ignore appsettings
+appsettings.Development.json
+appsettings.Local.json
+secrets.json
+
+# Ignore EF Core tools working folder (optional)
+#migrations/
+
+# Ignore publish output
+publish/
+
+# Ignore test results
+TestResults/
