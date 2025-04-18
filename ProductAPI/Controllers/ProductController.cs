@@ -24,45 +24,36 @@ namespace ProductAPI.Controllers
         {
             var result = await _service.CreateProduct(request);
 
-            if(result == true)
+            if(result.IsSuccessful == true)
             {
-                return Ok("Product Created Successfully");
+                return Ok(result);
             }
             else
             {
-                return BadRequest("Failed - Product exists already");
+                return BadRequest(result);
             }
         }
 
         [HttpGet]
         [Route("get-products")]
         public async Task<IActionResult> GetProducts()
-        {
-            var products = await _service.GetProducts();
-
-            if (products != null)
-            {
-                return Ok(products);
-            }
-            else
-            {
-                return NotFound(products);
-            }
+        {           
+            return Ok(await _service.GetProducts());            
         }
 
         [HttpPut]
         [Route("update-product/{id:long}")]
         public async Task<IActionResult> UpdateProduct(long id, [FromBody] UpdateProductRequest request)
         {
-            var product = await _service.UpdateProduct(id, request);
+            var result = await _service.UpdateProduct(id, request);
 
-            if (product == true)
+            if (result.IsSuccessful == true)
             {
-                return Ok("Product Updated Successfully");
+                return NoContent();
             }
             else
             {
-                return BadRequest("Product Update Failed");
+                return BadRequest(result);
             }
         }
 
@@ -70,15 +61,15 @@ namespace ProductAPI.Controllers
         [Route("delete-product/{id:long}")]
         public async Task<IActionResult> DeleteProduct(long id)
         {
-            var product = await _service.DeleteProduct(id);
+            var result = await _service.DeleteProduct(id);
 
-            if (product == true)
+            if (result.IsSuccessful == true)
             {
-                return Ok("Product Deleted Successfully");
+                return Ok(result);
             }
             else
             {
-                return BadRequest("Unable to delete product");
+                return BadRequest(result);
             }
         }
     }
